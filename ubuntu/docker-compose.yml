@@ -5,14 +5,17 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+    
+    command: tail -f /dev/null
+
     #hostname: sonic-pi
 
     privileged: true
+    user: 1000:1000
 
     devices:
       - /dev/snd
 
-    user: ${UID}:${GID}
 
     environment:
       - DISPLAY=${DISPLAY}
@@ -20,7 +23,7 @@ services:
       - PULSE_COOKIE=/run/pulse/cookie
       - QT_X11_NO_MITSHM=1
       - XAUTHORITY=/.Xauthority
-      - #XAUTHORITY=/tmp/.docker.xauth
+    #  - XAUTHORITY=/tmp/.docker.xauth
 
     #ports:
     #  - "4557:4557"
