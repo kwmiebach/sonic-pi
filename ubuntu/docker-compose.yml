@@ -5,8 +5,10 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-    
+
     command: tail -f /dev/null
+    
+    network_mode: host
 
     #hostname: sonic-pi
 
@@ -19,6 +21,7 @@ services:
 
     environment:
       - DISPLAY=${DISPLAY}
+      - SONIC_PI_HOME=/home/sonicpi
       - PULSE_SERVER=unix:${XDG_RUNTIME_DIR}/pulse/native
       - PULSE_COOKIE=/run/pulse/cookie
       - QT_X11_NO_MITSHM=1
@@ -32,8 +35,8 @@ services:
     #  - "4569:4569"
     #  - "4570:4570"
 
-    #volumes:
-    #  - ./sonic-pi:/home/sonicpi
+    volumes:
+      - $HOME/.sonic-pi:/home/sonicpi
     #  - ./app:/home/sonic-pi/app
     #  - ./log:/home/sonic-pi/log
     #  - ./etc:/home/sonic-pi/etc
