@@ -1,0 +1,45 @@
+version: '3.7'
+
+services:
+  sonic-pi:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    #hostname: sonic-pi
+
+    privileged: true
+
+    devices:
+      - /dev/snd
+
+    user: ${UID}:${GID}
+
+    environment:
+      - DISPLAY=${DISPLAY}
+      - PULSE_SERVER=unix:${XDG_RUNTIME_DIR}/pulse/native
+      - PULSE_COOKIE=/run/pulse/cookie
+      - QT_X11_NO_MITSHM=1
+      - XAUTHORITY=/.Xauthority
+      - #XAUTHORITY=/tmp/.docker.xauth
+
+    #ports:
+    #  - "4557:4557"
+    #  - "4558:4558"
+    #  - "4560:4560"
+    #  - "4569:4569"
+    #  - "4570:4570"
+
+    #volumes:
+    #  - ./sonic-pi:/home/sonicpi
+    #  - ./app:/home/sonic-pi/app
+    #  - ./log:/home/sonic-pi/log
+    #  - ./etc:/home/sonic-pi/etc
+    #  - ./synthdefs:/home/sonic-pi/synthdefs
+    #  - ./examples:/home/sonic-pi/examples
+    #  - ./server/etc:/home/sonic-pi/server/etc
+    #  - ./server/lib:/home/sonic-pi/server/lib
+    #  - ./server/log:/home/sonic-pi/server/log
+    #  - ./server/vendor:/home/sonic-pi/server/vendor
+    #  - ./server/db:/home/sonic-pi/server/db
+    #  - ./server/etc:/home/sonic-pi/server/etc
+    #  - ./server/etc:/home/sonic-pi/server/etc
